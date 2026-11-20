@@ -1,0 +1,25 @@
+{
+  "name": "english-speaking",
+  "version": "1.0.0",
+  "description": "영어 회화 연습 웹앱 (iPhone Safari / 홈 화면 앱)",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "serve": "npx --yes http-server docs -p 8080 -c-1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kilo85/English-Speaking.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kilo85/English-Speaking/issues"
+  },
+  "homepage": "https://github.com/kilo85/English-Speaking#readme",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.11.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  },
+  "private": true,
+  "type": "module"
+}

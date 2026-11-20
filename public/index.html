@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Speak">
+  <meta name="theme-color" content="#f7f6f2" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#18181a" media="(prefers-color-scheme: dark)">
+  <title>Speak</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icon-180.png">
+  <link rel="icon" href="icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="top">
+      <button id="open-settings" class="icon-btn" aria-label="설정">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm7.43-2.53a7.8 7.8 0 0 0 0-1.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.3 7.3 0 0 0-1.68-.97l-.36-2.54A.5.5 0 0 0 14.13 2h-3.84a.5.5 0 0 0-.5.42l-.36 2.54c-.6.24-1.17.56-1.68.97l-2.39-.96a.5.5 0 0 0-.6.22L2.84 8.51a.5.5 0 0 0 .12.64l2.03 1.58a7.8 7.8 0 0 0 0 1.94l-2.03 1.58a.5.5 0 0 0-.12.64l1.92 3.32c.13.22.39.3.6.22l2.39-.96c.51.41 1.08.73 1.68.97l.36 2.54c.04.24.25.42.5.42h3.84c.25 0 .46-.18.5-.42l.36-2.54c.6-.24 1.17-.56 1.68-.97l2.39.96c.22.08.47 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58Z"/></svg>
+      </button>
+    </header>
+
+    <div class="body">
+      <div class="talk">
+        <section class="bubble ai" aria-live="polite">
+          <div class="who">AI</div>
+          <p id="ai-en" class="en"></p>
+          <p id="ai-ko" class="ko"></p>
+        </section>
+
+        <section class="bubble me">
+          <div class="who">나</div>
+          <p id="me-en" class="en"></p>
+          <p id="me-ko" class="ko"></p>
+        </section>
+      </div>
+
+      <aside class="level" aria-label="난이도">
+        <button id="up" class="lv-btn" aria-label="더 어렵게">▲<span>어렵게</span></button>
+        <div id="lv" class="lv">Lv.3</div>
+        <button id="down" class="lv-btn" aria-label="더 쉽게">▼<span>쉽게</span></button>
+      </aside>
+    </div>
+
+    <footer class="bottom">
+      <button id="mic" class="mic" data-phase="idle" aria-label="마이크">
+        <svg viewBox="0 0 24 24" width="34" height="34" aria-hidden="true"><path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V5a3 3 0 1 0-6 0v6a3 3 0 0 0 3 3Zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11h-2Z"/></svg>
+      </button>
+      <div id="mic-label" class="mic-label">눌러서 말하기</div>
+    </footer>
+
+    <div id="toast" class="toast" role="status" hidden></div>
+  </main>
+
+  <dialog id="settings">
+    <form id="settings-form" method="dialog">
+      <h2>설정</h2>
+      <label>
+        Anthropic API 키
+        <input id="key-input" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="sk-ant-...">
+      </label>
+      <p class="hint">키는 이 기기에만 저장되고, Anthropic API로만 전송돼요.</p>
+      <label>
+        한글 번역 표시
+        <select id="ko-mode">
+          <option value="auto">자동 (Lv.5부터 가림)</option>
+          <option value="show">항상 보이기</option>
+          <option value="hide">항상 가리기 (탭하면 보임)</option>
+        </select>
+      </label>
+      <div class="row">
+        <button type="button" id="new-chat" class="secondary">새 대화</button>
+        <span class="spacer"></span>
+        <button type="button" id="close-settings" class="secondary">닫기</button>
+        <button type="submit" class="primary">저장</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
