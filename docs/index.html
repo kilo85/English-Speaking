@@ -18,6 +18,7 @@
 <body>
   <main class="app">
     <header class="top">
+      <span id="demo-badge" class="badge" hidden>체험 모드</span>
       <button id="open-settings" class="icon-btn" aria-label="설정">
         <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm7.43-2.53a7.8 7.8 0 0 0 0-1.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.3 7.3 0 0 0-1.68-.97l-.36-2.54A.5.5 0 0 0 14.13 2h-3.84a.5.5 0 0 0-.5.42l-.36 2.54c-.6.24-1.17.56-1.68.97l-2.39-.96a.5.5 0 0 0-.6.22L2.84 8.51a.5.5 0 0 0 .12.64l2.03 1.58a7.8 7.8 0 0 0 0 1.94l-2.03 1.58a.5.5 0 0 0-.12.64l1.92 3.32c.13.22.39.3.6.22l2.39-.96c.51.41 1.08.73 1.68.97l.36 2.54c.04.24.25.42.5.42h3.84c.25 0 .46-.18.5-.42l.36-2.54c.6-.24 1.17-.56 1.68-.97l2.39.96c.22.08.47 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58Z"/></svg>
       </button>
@@ -63,6 +64,8 @@
         <input id="key-input" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="sk-ant-...">
       </label>
       <p class="hint">키는 이 기기에만 저장되고, Anthropic API로만 전송돼요.</p>
+      <button type="button" id="try-demo" class="secondary wide">키 없이 체험하기</button>
+      <p class="hint">미리 준비한 질문으로 화면과 음성 흐름만 확인해요. 실제 AI 대화는 아니에요.</p>
       <label>
         한글 번역 표시
         <select id="ko-mode">

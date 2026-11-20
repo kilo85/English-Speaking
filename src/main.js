@@ -1,4 +1,5 @@
 import { ConversationClient, describeError } from "./claude.js";
+import { DemoClient } from "./demo.js";
 import { LevelController, speechRate } from "./level.js";
 import { Listener, sttSupported, speak, stopSpeaking, unlockSpeech } from "./speech.js";
 
@@ -26,6 +27,7 @@ const store = {
 const state = {
   apiKey: store.get("apiKey", ""),
   koMode: store.get("koMode", "auto"), // auto | show | hide
+  demo: store.get("demo", false), // API 키 없이 체험하는 모드
   level: new LevelController(store.get("baseLevel", 3)),
   client: null,
   listener: null,
@@ -108,8 +110,12 @@ async function runTurn(text) {
   }
 }
 
+function renderMode() {
+  $("demo-badge").hidden = !state.demo;
+}
+
 async function startConversation() {
-  state.client = new ConversationClient(state.apiKey);
+  state.client = state.demo ? new DemoClient() : new ConversationClient(state.apiKey);
   state.started = true;
   $("ai-en").textContent = "…";
   setKo($("ai-ko"), "");
@@ -120,7 +126,7 @@ async function startConversation() {
 
 async function onMic() {
   unlockSpeech();
-  if (!state.apiKey) {
+  if (!state.apiKey && !state.demo) {
     openSettings();
     return;
   }
@@ -174,6 +180,12 @@ function saveSettings(e) {
   store.set("koMode", state.koMode);
   $("settings").close();
   applyKoVisibility();
+  if (key && state.demo) {
+    state.demo = false;
+    store.set("demo", false);
+    state.started = false;
+  }
+  renderMode();
   if (keyChanged) state.started = false;
   if (key && !state.started) {
     unlockSpeech();
@@ -200,7 +212,15 @@ function init() {
   $("close-settings").addEventListener("click", () => $("settings").close());
   $("new-chat").addEventListener("click", () => {
     $("settings").close();
-    if (state.apiKey) startConversation();
+    if (state.apiKey || state.demo) startConversation();
+  });
+  $("try-demo").addEventListener("click", () => {
+    $("settings").close();
+    state.demo = true;
+    store.set("demo", true);
+    renderMode();
+    unlockSpeech();
+    startConversation();
   });
 
   // 국문 탭하면 보이기
@@ -230,8 +250,12 @@ function init() {
   if (!sttSupported) toast("이 브라우저는 음성 인식을 지원하지 않아요. iPhone에서는 Safari로 열어 주세요.");
 
   renderLevel();
+  renderMode();
   setPhase("idle");
-  if (!state.apiKey) {
+  if (state.demo) {
+    $("ai-en").textContent = "Tap the mic to start talking.";
+    setKo($("ai-ko"), "체험 모드예요. 마이크를 누르면 시작해요.");
+  } else if (!state.apiKey) {
     $("ai-en").textContent = "Hi! Tap the mic to start.";
     setKo($("ai-ko"), "먼저 설정에서 API 키를 입력해 주세요.");
   } else {

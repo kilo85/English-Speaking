@@ -41,7 +41,12 @@ body {
   padding: env(safe-area-inset-top) 16px env(safe-area-inset-bottom);
 }
 
-.top { display: flex; justify-content: flex-end; padding-top: 8px; }
+.top { display: flex; justify-content: flex-end; align-items: center; gap: 8px; padding-top: 8px; }
+.badge {
+  margin-right: auto; font-size: 12px; font-weight: 600;
+  color: var(--accent); background: var(--accent-soft);
+  padding: 4px 10px; border-radius: 999px;
+}
 .icon-btn {
   border: 0; background: none; color: var(--muted);
   width: 40px; height: 40px; border-radius: 20px;
@@ -141,3 +146,7 @@ dialog input, dialog select {
 .row button { font-size: 15px; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--line); }
 .primary { background: var(--accent); color: #fff; border-color: var(--accent) !important; }
 .secondary { background: var(--card); color: var(--text); }
+.wide {
+  width: 100%; font-size: 15px; padding: 11px 14px; margin-bottom: 8px;
+  border-radius: 10px; border: 1px solid var(--line);
+}

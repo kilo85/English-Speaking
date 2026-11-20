@@ -27,6 +27,7 @@ iPhone Safari에서 열고 **홈 화면에 추가**하면 앱처럼 쓸 수 있�
 1. **Safari**로 위 주소 열기
 2. 공유 버튼 → **홈 화면에 추가**
 3. 처음 실행하면 설정 창이 뜹니다. **Anthropic API 키**를 입력하고 저장
+   - 키 없이 흐름만 보고 싶으면 **키 없이 체험하기**를 누르세요. 미리 준비한 질문으로 화면과 음성만 확인합니다
    - 키는 [console.anthropic.com](https://console.anthropic.com)에서 발급
    - 키는 이 iPhone 안에만 저장되고 Anthropic API로만 전송됩니다
 4. 마이크 권한, 음성 인식 권한을 허용
@@ -44,6 +45,7 @@ public/          정적 파일 (HTML, CSS, 아이콘, manifest)
 src/main.js      화면과 대화 흐름
 src/claude.js    Claude API 호출 (응답 + 번역 + 레벨 평가를 JSON으로 한 번에)
 src/level.js     수준 보정 로직
+src/demo.js      체험 모드 (API 키 없이 준비된 질문으로 동작)
 src/speech.js    음성 인식(STT)과 음성 합성(TTS), Safari Web Speech API
 docs/            빌드 결과 (GitHub Pages가 여기서 서비스)
 ```
